@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for ip in $(awk '!/^#/ {print $1}' /etc/hosts); do
+    ping -c 1 -W 1 "$ip" &>/dev/null && echo "$ip UP" || echo "$ip DOWN"
+done
