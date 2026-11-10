@@ -1,0 +1,24 @@
+#!/bin/bash
+
+verifica_ip() {
+    host=$1
+    ip=$2
+    dns=$3
+
+    rezultat=$(dig +short @"$dns" "$host" A)
+
+    if [ "$rezultat" = "$ip" ]; then
+        echo "$host ($ip) VALID"
+    else
+        echo "$host ($ip) INVALID"
+    fi
+}
+
+DNS="8.8.8.8"
+
+while read -r ip host rest; do
+    [[ "$ip" =~ ^#.*$ || -z "$ip" ]] && continue
+
+    verifica_ip "$host" "$ip" "$DNS"
+
+done < /etc/hosts
