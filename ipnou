@@ -22,3 +22,4 @@ while read -r ip host rest; do
     verifica_ip "$host" "$ip" "$DNS"
 
 done < /etc/hosts
+echo "Modificat de Banu Sebastian"
